@@ -266,10 +266,17 @@ def histogram_equalization_f(img): #cv2.equalizeHist
  
     return res
 
-def brightness_correction(img_RGB):
-    res = cv2.cvtColor(img_RGB, cv2.COLOR_RGB2HSV)
-    res[:,:,2] = histogram_equalization_f(res[:,:,2])
-    res = cv2.cvtColor(res, cv2.COLOR_HSV2RGB)
+def brightness_correction(img_RGB, level= 'high', sat=1.2, val=0.85):
+    level = level.upper()
+    if level == 'HIGH':
+        res = cv2.cvtColor(img_RGB, cv2.COLOR_RGB2HSV)
+        res[:,:,2] = histogram_equalization_f(res[:,:,2])
+        res = cv2.cvtColor(res, cv2.COLOR_HSV2RGB)
+    elif level == 'LOW':
+        res = cv2.cvtColor(img_RGB, cv2.COLOR_RGB2HSV)
+        res[:,:,1] = cv2.multiply(res[:,:,1],sat)
+        res[:,:,2] = cv2.multiply(res[:,:,2],val)
+        res = cv2.cvtColor(res, cv2.COLOR_HSV2RGB)
 
     return res
 
