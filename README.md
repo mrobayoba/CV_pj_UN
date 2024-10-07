@@ -1,0 +1,1 @@
+This is a basic plant illness segmentation tool that works only with color thresholding and morphology operations. The idea is improved by using other methods to achive the same goal. Next step will be implement k-means to see if the image can be segmented by that way.
